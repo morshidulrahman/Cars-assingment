@@ -17,7 +17,8 @@ const CarsSchema = new Schema<Tcars>({
     },
     price: {
         type: Number,
-        required: [true, 'price is required']
+        required: [true, 'price is required'],
+        min: [0, 'Price must be a positive number'],
     },
     category: {
         type: String,
@@ -30,7 +31,8 @@ const CarsSchema = new Schema<Tcars>({
     },
     quantity: {
         type: Number,
-        required: [true, 'quantity is required']
+        required: [true, 'quantity is required'],
+        min: [0, 'quantity must be a positive number'],
     },
     inStock: Boolean,
 

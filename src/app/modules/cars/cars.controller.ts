@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { CarsModel } from "./cars.model";
+import config from "../../config";
 
 
 
 const CreatedCars = async (req: Request, res: Response) => {
-
     try {
         const { cars: carsData } = req.body
         const result = await CarsModel.create(carsData)
@@ -13,19 +13,20 @@ const CreatedCars = async (req: Request, res: Response) => {
             message: "Car created successfully",
             data: result
         })
-
-    } catch (err) {
+    } catch (err: any) {
         res.status(500).json({
-            status: false,
-            message: "Failed to create car",
-            error: err
-        })
-    }
+            message: err.message || "something went wrong",
+            success: false,
+            error: {
+                name: err.name || "something went wrong",
+                errors: err.errors,
+            },
+            stack: config.node_env ? err.stack : undefined,
+        });
+    };
+
 
 }
-
-
-
 
 
 export const CarsController = {
