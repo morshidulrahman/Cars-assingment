@@ -35,6 +35,10 @@ const CarsSchema = new Schema<Tcars>({
         min: [0, 'quantity must be a positive number'],
     },
     inStock: Boolean,
+    isDeleted: {
+        type: Boolean,
+        default: false,
+    }
 
 }, { timestamps: true });
 
