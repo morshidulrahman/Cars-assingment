@@ -43,4 +43,20 @@ const CarsSchema = new Schema<Tcars>({
 }, { timestamps: true });
 
 
+
+
+CarsSchema.pre('find', async function (next) {
+    this.find({ isDeleted: { $ne: true } })
+    next()
+})
+
+CarsSchema.pre('findOne', async function (next) {
+    this.find({ isDeleted: { $ne: true } })
+    next()
+})
+
+
+
+
 export const CarsModel = model('cars', CarsSchema)
+

@@ -35,11 +35,18 @@ const UpdateSingleCarDb = async (id: string, updatedData: object) => {
 
 }
 
+const DeleteSingleCar = async (id: string) => {
+    const result = await CarsModel.updateOne({ _id: id }, { isDeleted: true })
+    return result
+
+}
+
 
 
 export const CarSivces = {
     CarsinsertonDb,
     getSingleCarDb,
     allcarsDb,
-    UpdateSingleCarDb
+    UpdateSingleCarDb,
+    DeleteSingleCar
 }

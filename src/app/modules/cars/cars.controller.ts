@@ -30,7 +30,7 @@ const GetallCars = async (req: Request, res: Response) => {
 
 const CreatedCars = async (req: Request, res: Response) => {
     try {
-        const { cars: carsData } = req.body
+        const carsData = req.body
         const result = await CarSivces.CarsinsertonDb(carsData)
         res.status(200).json({
             success: true,
@@ -51,7 +51,7 @@ const CreatedCars = async (req: Request, res: Response) => {
 }
 
 
-const singleCar = async (req: Request, res: Response) => {
+const getsingleCar = async (req: Request, res: Response) => {
     try {
         const { carId } = req.params
         const result = await CarSivces.getSingleCarDb(carId)
@@ -77,7 +77,7 @@ const singleCar = async (req: Request, res: Response) => {
 const UpdateSingleCar = async (req: Request, res: Response) => {
     try {
         const { carId } = req.params
-        const { data: updatedData } = req.body
+        const updatedData = req.body
 
         const result = await CarSivces.UpdateSingleCarDb(carId, updatedData)
 
@@ -99,9 +99,38 @@ const UpdateSingleCar = async (req: Request, res: Response) => {
     }
 }
 
+
+
+
+const DeletesingleCar = async (req: Request, res: Response) => {
+    try {
+        const { carId } = req.params
+        await CarSivces.DeleteSingleCar(carId)
+        res.status(200).json({
+            status: true,
+            message: "Car deleted successfully",
+            data: {}
+        })
+    } catch (err: any) {
+        res.status(500).json({
+            message: err.message || "something went wrong",
+            success: false,
+            error: {
+                name: err.name || "something went wrong",
+                errors: err.errors,
+            },
+            stack: config.node_env ? err.stack : undefined,
+        });
+    }
+
+}
+
+
+
 export const CarsController = {
     CreatedCars,
-    singleCar,
+    getsingleCar,
     GetallCars,
-    UpdateSingleCar
+    UpdateSingleCar,
+    DeletesingleCar
 }
