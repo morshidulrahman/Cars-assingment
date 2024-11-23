@@ -22,7 +22,7 @@ const OrdersSchema = new Schema<Torders>(
       min: [0, 'totalPrice must be a positive number'],
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false },
 );
 
 export const OrdersModel = model('orders', OrdersSchema);

@@ -40,7 +40,8 @@ const CarsSchema = new Schema<Tcars>(
       default: false,
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false }
+
 );
 
 CarsSchema.pre('find', async function (next) {
