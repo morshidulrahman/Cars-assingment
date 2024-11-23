@@ -1,62 +1,56 @@
-import { model, Schema } from "mongoose";
-import { Tcars } from "./cars.interface";
+import { model, Schema } from 'mongoose';
+import { Tcars } from './cars.interface';
 
-
-const CarsSchema = new Schema<Tcars>({
+const CarsSchema = new Schema<Tcars>(
+  {
     brand: {
-        type: String,
-        required: [true, 'brand is required']
+      type: String,
+      required: [true, 'brand is required'],
     },
     model: {
-        type: String,
-        required: [true, 'model is required']
+      type: String,
+      required: [true, 'model is required'],
     },
     year: {
-        type: Number,
-        required: [true, 'year is required']
+      type: Number,
+      required: [true, 'year is required'],
     },
     price: {
-        type: Number,
-        required: [true, 'price is required'],
-        min: [0, 'Price must be a positive number'],
+      type: Number,
+      required: [true, 'price is required'],
+      min: [0, 'Price must be a positive number'],
     },
     category: {
-        type: String,
-        enum: ['Sedan', 'SUV', 'Truck', 'Coupe', 'Convertible'],
-        required: [true, 'category is required']
+      type: String,
+      enum: ['Sedan', 'SUV', 'Truck', 'Coupe', 'Convertible'],
+      required: [true, 'category is required'],
     },
     description: {
-        type: String,
-        required: [true, 'description is required']
+      type: String,
+      required: [true, 'description is required'],
     },
     quantity: {
-        type: Number,
-        required: [true, 'quantity is required'],
-        min: [0, 'quantity must be a positive number'],
+      type: Number,
+      required: [true, 'quantity is required'],
+      min: [0, 'quantity must be a positive number'],
     },
     inStock: Boolean,
     isDeleted: {
-        type: Boolean,
-        default: false,
-    }
-
-}, { timestamps: true });
-
-
-
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true },
+);
 
 CarsSchema.pre('find', async function (next) {
-    this.find({ isDeleted: { $ne: true } })
-    next()
-})
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
 
 CarsSchema.pre('findOne', async function (next) {
-    this.find({ isDeleted: { $ne: true } })
-    next()
-})
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
 
-
-
-
-export const CarsModel = model('cars', CarsSchema)
-
+export const CarsModel = model('cars', CarsSchema);

@@ -9,5 +9,4 @@ router.post('/cars', CarsController.CreatedCars);
 router.put('/cars/:carId', CarsController.UpdateSingleCar);
 router.delete('/cars/:carId', CarsController.DeletesingleCar);
 
-
 export const CarsRoute = router;
