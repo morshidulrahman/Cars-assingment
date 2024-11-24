@@ -9,5 +9,5 @@ export type Tcars = {
   inStock: boolean;
   createdAt?: Date;
   updatedAt?: Date;
-  isDeleted: boolean;
+
 };

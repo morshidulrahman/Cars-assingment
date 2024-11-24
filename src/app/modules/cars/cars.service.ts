@@ -6,12 +6,12 @@ const allcarsDb = async (
 ) => {
   const filter = searchTerm
     ? {
-        $or: [
-          { brand: { $regex: searchTerm, $options: 'i' } },
-          { model: { $regex: searchTerm, $options: 'i' } },
-          { category: { $regex: searchTerm, $options: 'i' } },
-        ],
-      }
+      $or: [
+        { brand: { $regex: searchTerm, $options: 'i' } },
+        { model: { $regex: searchTerm, $options: 'i' } },
+        { category: { $regex: searchTerm, $options: 'i' } },
+      ],
+    }
     : {};
   const result = await CarsModel.find(filter);
   return result;
@@ -33,7 +33,7 @@ const UpdateSingleCarDb = async (id: string, updatedData: object) => {
 };
 
 const DeleteSingleCar = async (id: string) => {
-  const result = await CarsModel.updateOne({ _id: id }, { isDeleted: true });
+  const result = await CarsModel.deleteOne({ _id: id });
   return result;
 };
 

@@ -34,24 +34,13 @@ const CarsSchema = new Schema<Tcars>(
       required: [true, 'quantity is required'],
       min: [0, 'quantity must be a positive number'],
     },
-    inStock: Boolean,
-    isDeleted: {
-      type: Boolean,
-      default: false,
-    },
+    inStock: Boolean
+
   },
   { timestamps: true, versionKey: false }
 
 );
 
-CarsSchema.pre('find', async function (next) {
-  this.find({ isDeleted: { $ne: true } });
-  next();
-});
 
-CarsSchema.pre('findOne', async function (next) {
-  this.find({ isDeleted: { $ne: true } });
-  next();
-});
 
 export const CarsModel = model('cars', CarsSchema);
