@@ -17,7 +17,7 @@ $ npm i
 # Run the project
 $ npm run start:dev
 
-# The server will initialize in the <http://localhost:3000>
+# The server will initialize in the <http://localhost:5000>
 ```
 
 # Project Description
